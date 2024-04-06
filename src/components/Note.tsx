@@ -1,10 +1,16 @@
 import React from "react";
 
-function Note() {
+interface Note {
+    title: string;
+    content: string;
+}
+
+function Note(props:Note) {
     return (
         <div className="note">
-            <h1>This is note title</h1>
-            <p>This is note content</p>
+            <h1>{props.title}</h1>
+            <p>{props.content}</p>
+            <button>DELETE</button>
         </div>
     );
 }
