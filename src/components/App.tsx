@@ -1,9 +1,16 @@
 import React from "react";
+import Header from "./Header";
+import Footer from "./Footer";
+import Note from "./Note";
+import CreateArea from "./CreateArea";
 
 function App() {
     return (
-        <div className="container">
-            <h1>10 days with React-TS</h1>
+        <div>
+            <Header/>
+            <CreateArea/>
+            <Note/>
+            <Footer/>
         </div>
     );
 }
