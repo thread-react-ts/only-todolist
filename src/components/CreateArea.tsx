@@ -1,4 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
+import AddIcon from "@mui/icons-material/Add";
+import { Fab } from "@mui/material";
+import { Zoom } from "@mui/material";
 
 interface Note {
     title: string;
@@ -10,6 +13,8 @@ interface CreateAreaProps {
 }
 
 function CreateArea(props: CreateAreaProps) {
+    const [isExpanded, setExpand] = useState(false);
+
     const [note, setNote] = useState<Note>({
         title: "",
         content: ""
@@ -24,32 +29,42 @@ function CreateArea(props: CreateAreaProps) {
         }));
     }
 
-    function submitNote(event: FormEvent<HTMLFormElement>) {
+    function submitNote() {
         props.onAdd(note);
         setNote({
             title: "",
             content: ""
         });
-        event.preventDefault();
+    }
+
+    function expand() {
+        setExpand(true);
     }
 
     return (
         <div>
-            <form onSubmit={submitNote}>
-                <input
-                    name="title"
-                    onChange={handleChange}
-                    value={note.title}
-                    placeholder="Title"
-                />
+            <form className="create-note" onSubmit={e => e.preventDefault()}>
+                {isExpanded && (
+                    <input
+                        name="title"
+                        onChange={handleChange}
+                        value={note.title}
+                        placeholder="Title"
+                    />
+                )}
                 <textarea
                     name="content"
+                    onClick={expand}
                     onChange={handleChange}
                     value={note.content}
                     placeholder="Take a note..."
-                    rows={2}
+                    rows={isExpanded ? 2 : 1}
                 />
-                <button type="submit">Add</button>
+                <Zoom in={isExpanded}>
+                    <Fab onClick={submitNote}>
+                        <AddIcon />
+                    </Fab>
+                </Zoom>
             </form>
         </div>
     );
