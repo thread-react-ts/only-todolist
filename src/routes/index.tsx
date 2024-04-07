@@ -3,8 +3,8 @@ import { FC, useState, useEffect } from "react";
 import axios from "axios";
 
 import Homepage from "../pages";
-import Detailed from "../pages/Detailed";
-import NotFound from "../pages/NotFound";
+import Detailed from "../pages/detailed";
+import NotFound from "../pages/not-found";
 
 import { ThemeContext } from "../utils/context/context";
 
@@ -17,7 +17,6 @@ const Router: FC = () => {
         document.body.classList.toggle("dark-theme", theme === "dark");
     }, [theme]);
 
-    // Fungsi untuk menoggle tema
     const toggleTheme = () => {
         setTheme(prevTheme => (prevTheme === "light" ? "dark" : "light"));
     }

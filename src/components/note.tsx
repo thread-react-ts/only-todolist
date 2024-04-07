@@ -1,16 +1,16 @@
-import React from "react";
+import { FC } from "react";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
-interface Note {
+interface NoteProps {
     id: number,
     title: string;
     content: string;
     onDelete: (id: number) => void;
 }
 
-function Note(props:Note) {
+const Note: FC<NoteProps> = (props) => {
     function handleClick() {
-        props.onDelete(props.id)
+        props.onDelete(props.id);
     }
 
     return (
@@ -22,6 +22,6 @@ function Note(props:Note) {
             </button>
         </div>
     );
-}
+};
 
 export default Note;
