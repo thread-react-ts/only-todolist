@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { FC, useState, useMemo, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import axios from "axios";
 
 import Homepage from "../pages";
@@ -12,7 +12,16 @@ axios.defaults.baseURL = "https://api.todoist.com/rest/v2/";
 
 const Router: FC = () => {
     const [theme, setTheme] = useState<string>("light");
-    const background = useMemo(() => ({theme, setTheme}), [theme]);
+
+    useEffect(() => {
+        document.body.classList.toggle("dark-theme", theme === "dark");
+    }, [theme]);
+
+    // Fungsi untuk menoggle tema
+    const toggleTheme = () => {
+        setTheme(prevTheme => (prevTheme === "light" ? "dark" : "light"));
+    }
+
     const router = createBrowserRouter([
         {
             path: "/",
@@ -25,17 +34,12 @@ const Router: FC = () => {
             errorElement: <NotFound/>,
         },
     ]);
-    useEffect(() => {
-        if (theme === "dark") {
-            document.documentElement.classList.add("dark");
-        } else {
-            document.documentElement.classList.remove("dark");
-        }
-    }, [theme]);
 
     return (
-        <ThemeContext.Provider value={background}>
-            <RouterProvider router={router} />
+        <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
+            <div>
+                <RouterProvider router={router} />
+            </div>
         </ThemeContext.Provider>
     );
 };
