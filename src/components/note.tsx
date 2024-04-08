@@ -1,25 +1,28 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { NoteItem } from "../utils/types/note";
 
 interface NoteProps {
-    id: number,
-    title: string;
-    content: string;
-    onDelete: (id: number) => void;
+    note: NoteItem;
+    onDelete: () => void;
+    onClick: () => void;
 }
 
-const Note: FC<NoteProps> = (props) => {
-    function handleClick() {
-        props.onDelete(props.id);
-    }
+const Note: FC<NoteProps> = ({ note, onDelete, onClick }) => {
+    const { content, description } = note;
+    const handleDelete = () => {
+        onDelete();
+    };
 
     return (
-        <div className="note">
-            <h1>{props.title}</h1>
-            <p>{props.content}</p>
-            <button onClick={handleClick}>
-                <DeleteOutlineIcon />
-            </button>
+        <div className="note" onClick={onClick}>
+            <h1>{content}</h1>
+            <p>{description}</p>
+            {(
+                <button onClick={handleDelete}>
+                    <DeleteOutlineIcon />
+                </button>
+            )}
         </div>
     );
 };

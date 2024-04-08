@@ -2,25 +2,19 @@ import { useState, ChangeEvent } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { Fab } from "@mui/material";
 import { Zoom } from "@mui/material";
-
-interface objSubmitType {
-    id: number;
-    content: string;
-    description: string;
-    priority: string;
-}
+import { NoteItem } from "../utils/types/note"
 
 interface CreateAreaProps {
-    onAdd: (newNote: objSubmitType) => void;
+    onAdd: (newNote: NoteItem) => void;
 }
 
 function CreateArea(props: CreateAreaProps) {
     const [isExpanded, setExpand] = useState(false);
-    const [note, setNote] = useState<objSubmitType>({
-        id: 0,
+    const [note, setNote] = useState<NoteItem>({
+        id: "0",
         content: "",
         description: "",
-        priority: "2"
+        priority: 2
     });
 
     function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
@@ -34,10 +28,10 @@ function CreateArea(props: CreateAreaProps) {
     function submitNote() {
         props.onAdd(note);
         setNote({
-            id: 0,
+            id: "0",
             content: "",
             description: "",
-            priority: "2"
+            priority: 2
         });
     }
 
