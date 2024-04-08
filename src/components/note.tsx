@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { NoteItem } from "../utils/types/note";
 

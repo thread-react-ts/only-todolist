@@ -8,14 +8,12 @@ import { Spinner } from "../components/loading";
 import Swal from "sweetalert2";
 import Popup from "../components/pop-up";
 import { NoteItem } from "../utils/types/note";
-import { UserType } from "../utils/types/user";
 
 const Homepage: FC = () => {
     const [notes, setNotes] = useState<NoteItem[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [popupData, setPopupData] = useState<NoteItem | null>(null);
     const [showPopup, setShowPopup] = useState<boolean>(false);
-    const [objectSubmit, setObjectSubmit] = useState<Partial<UserType>>({});
     const [isDeleted, setIsDeleted] = useState<boolean>(false);
     const tokenStr = "16a40729d3574ceb9a23362c95e59b5bb977c0c2";
 
@@ -57,6 +55,7 @@ const Homepage: FC = () => {
             })
             .then((response) => {
                 const { data, message } = response.data;
+                console.log(data)
                 Swal.fire({
                     title: "Success",
                     text: message,
@@ -131,11 +130,11 @@ const Homepage: FC = () => {
             });
     };
 
-    function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, key: keyof typeof objectSubmit) {
+    /*function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, key: keyof typeof objectSubmit) {
         let tmp: any = { ...objectSubmit };
         tmp[key] = event.target.value;
         setObjectSubmit(tmp);
-    }
+    }*/
 
     return (
         <div>
