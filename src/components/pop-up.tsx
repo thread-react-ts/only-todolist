@@ -4,13 +4,13 @@ import { ButtonEdit, ButtonClose } from './button';
 import "../styles/index.css";
 
 interface PopupProps {
+    data: NoteItem;
     isOpen: boolean;
     onClose: () => void;
-    data: NoteItem;
     onEdit: () => void;
 }
 
-const Popup: FC<PopupProps> = ({ isOpen, onClose, data, onEdit }) => {
+const Popup: FC<PopupProps> = ({ data, isOpen, onClose,  onEdit }) => {
     console.log("Popup data:", data);
     const { content, description, priority } = data;
     const isCompleted = priority === 1 ? "completed" : "not completed";

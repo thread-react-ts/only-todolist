@@ -3,7 +3,7 @@ import { FC, useState, useEffect } from "react";
 import axios from "axios";
 
 import Homepage from "../pages";
-// import Detailed from "../pages/detailed";
+import Detailed from "../pages/detail-task";
 import NotFound from "../pages/not-found";
 
 import { ThemeContext } from "../utils/context/context";
@@ -27,11 +27,11 @@ const Router: FC = () => {
             element: <Homepage/>,
             errorElement: <NotFound/>,
         },
-        /*{
+        {
             path: "/detailed/:detail",
             element: <Detailed/>,
             errorElement: <NotFound/>,
-        },*/
+        },
     ]);
 
     return (

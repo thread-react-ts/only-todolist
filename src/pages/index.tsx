@@ -130,12 +130,6 @@ const Homepage: FC = () => {
             });
     };
 
-    /*function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, key: keyof typeof objectSubmit) {
-        let tmp: any = { ...objectSubmit };
-        tmp[key] = event.target.value;
-        setObjectSubmit(tmp);
-    }*/
-
     return (
         <div>
             <Header />
@@ -162,10 +156,15 @@ const Homepage: FC = () => {
             )}
             {!isDeleted && showPopup && popupData && (
                 <Popup 
+                    data={popupData}            
                     isOpen={showPopup} 
-                    onClose={() => setShowPopup(false)} 
-                    data={popupData} 
-                    onEdit={() => console.log("Edit clicked")} 
+                    onClose={() => setShowPopup(false)}  
+                    onEdit={() => {
+                        const selectedItem = notes.find(item => item.id === popupData.id);
+                        if (selectedItem) {
+                            window.location.href = `/detailed/${selectedItem.id}`;
+                        }
+                    }}
                 />
             )}
             <Footer />
