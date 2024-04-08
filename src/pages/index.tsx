@@ -162,7 +162,12 @@ const Homepage: FC = () => {
                 ))
             )}
             {!isDeleted && showPopup && popupData && (
-                <Popup isOpen={showPopup} onClose={() => setShowPopup(false)} data={popupData} onEdit={() => console.log("Edit clicked")} />
+                <Popup 
+                    isOpen={showPopup} 
+                    onClose={() => setShowPopup(false)} 
+                    data={popupData} 
+                    onEdit={() => console.log("Edit clicked")} 
+                />
             )}
             <Footer />
         </div>
