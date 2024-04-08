@@ -9,7 +9,6 @@ import Swal from "../utils/swal";
 import Layout from "../components/layout";
 import { ButtonBackHome } from "../components/button";
 import { NoteItem } from "../utils/types/note";
-import NotFound from "./not-found";
 
 const Detailed: FC = () => {
     const [objectSubmit, setObjectSubmit] = useState<Partial<UserType>>({});
@@ -45,12 +44,11 @@ const Detailed: FC = () => {
             })
             .catch((error) => {
                 alert(error.toString());
+                if (!data.id) {
+                    navigate("/not-found");
+                }
             })
             .finally(() => setLoading(false));
-    }
-
-    if (!data.id) {
-        return <NotFound />;
     }
 
     function handleChange(value: string | File, key: keyof typeof objectSubmit) {
